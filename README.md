@@ -44,3 +44,42 @@ Any reference to an investment's past or potential performance is not,
 and should not be construed as, a recommendation or as a guarantee of 
 any specific outcome or profit.
 By using this program you accept all liabilities, and that no claims can be made against the developers or others connected with the program.
+
+# Docker
+The Docker addition has some modifications in order to safely work.
+For starters, it uses ENV variables instead of a creds.config file. You can add the ENV variables to the global .env file from your host machine and reference them in your docker-compose for e.g. ENV ACCESS_KEY would be: `${ACCESS_KEY}`.
+There are 3 ENV variables:
+- ENV='production' (script will know to use the API keys, otherwise use the debug environment ones)
+- ACCESS_KEY (your API access key)
+- ACCESS_SECRET (your API secret)
+
+You have to put your the following files in a separate directory (for Docker-compose to mount):
+- config.yml
+- coins_bought.json (so you'll retain your portfolio if docker shutdown)
+- tickers.txt
+- trades.txt
+
+
+Pull `latest` Docker container:
+`docker pull hidde43/binance-trading-bot:latest`
+
+Run Docker container locally:
+`docker run -it --platform linux/amd64 --env-file .env hidde43/binance-trading-bot:latest`
+
+Example Docker-compose:
+```yaml
+# Binance Volatility Trading Bot
+  binance_bot:
+    container_name: binance_bot
+    restart: always
+    image: hidde43/binance-trading-bot:latest
+    volumes:
+      - <path to your data folder>:/data
+    environment:
+      ENV: production
+      ACCESS_KEY: ${BINANCE_ACCESS_KEY} # parsed from global ENV
+      ACCESS_SECRET: ${BINANCE_SECRET_KEY}
+```
+
+Build new version:
+`docker buildx build --platform linux/amd64  -f build/Dockerfile . -t hidde43/binance-trading-bot:latest -t hidde43/binance-trading-bot:v0.1`

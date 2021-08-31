@@ -11,3 +11,9 @@ __*__
 
 # IDE settings
 .vscode
+
+# ENV file
+.env
+
+# config
+config.yml
