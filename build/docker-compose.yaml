@@ -6,8 +6,8 @@ services:
       restart: unless-stopped
       image: hidde43/binance-trading-bot:latest
       volumes:
-        - ${USERDIR}/docker/binance-bot:/data
+        - ${USERDIR}/docker/binance-bot/config:/config
       environment:
         ENV: production
         ACCESS_KEY: ${BINANCE_ACCESS_KEY} # parsed from global ENV
-        ACCESS_SECRET: ${BINANCE_SECRET_KEY}
+        SECRET_KEY: ${BINANCE_SECRET_KEY}

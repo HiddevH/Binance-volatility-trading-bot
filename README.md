@@ -74,11 +74,11 @@ Example Docker-compose:
     restart: always
     image: hidde43/binance-trading-bot:latest
     volumes:
-      - <path to your data folder>:/data
+      - <path to your data folder>:/config # config is what Docker expects as mount
     environment:
       ENV: production
       ACCESS_KEY: ${BINANCE_ACCESS_KEY} # parsed from global ENV
-      ACCESS_SECRET: ${BINANCE_SECRET_KEY}
+      SECRET_KEY: ${BINANCE_SECRET_KEY}
 ```
 
 Build new version:

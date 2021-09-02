@@ -30,8 +30,8 @@ class txcolors:
 
 args = parse_args()
 
-DEFAULT_CONFIG_FILE = "data/config.yml"
-DEFAULT_CREDS_FILE = "data/creds.yml"
+DEFAULT_CONFIG_FILE = "/config/config.yml"
+DEFAULT_CREDS_FILE = "/config/creds.yml"
 
 
 config_file = args.config if args.config else DEFAULT_CONFIG_FILE
@@ -60,7 +60,7 @@ def write_log(logline):
         f.write(timestamp + " " + logline + "\n")
 
 
-with open("data/coins_bought.json", "r") as f:
+with open("/config/coins_bought.json", "r") as f:
     coins = json.load(f)
     total_profit = 0
     total_price_change = 0
@@ -95,4 +95,4 @@ with open("data/coins_bought.json", "r") as f:
         f"Total Profit: {text_color}{total_profit:.2f}{txcolors.DEFAULT}. Total Price Change: {text_color}{total_price_change:.2f}%{txcolors.DEFAULT}"
     )
 
-os.remove("data/coins_bought.json")
+os.remove("/config/coins_bought.json")

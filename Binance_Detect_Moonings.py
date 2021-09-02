@@ -561,8 +561,8 @@ if __name__ == "__main__":
     global bot_paused
     bot_paused = False
 
-    DEFAULT_CONFIG_FILE = "data/config.yml"
-    DEFAULT_CREDS_FILE = "data/creds.yml"  # unused by docker
+    DEFAULT_CONFIG_FILE = "/config/config.yml"
+    DEFAULT_CREDS_FILE = "/config/creds.yml"  # unused by docker
 
     config_file = args.config if args.config else DEFAULT_CONFIG_FILE
     creds_file = args.creds if args.creds else DEFAULT_CREDS_FILE
@@ -631,7 +631,7 @@ if __name__ == "__main__":
     coins_bought = {}
 
     # path to the saved coins_bought file
-    coins_bought_file_path = "data/coins_bought.json"
+    coins_bought_file_path = "/config/coins_bought.json"
 
     # rolling window of prices; cyclical queue
     historical_prices = [None] * (TIME_DIFFERENCE * RECHECK_INTERVAL)
@@ -642,7 +642,7 @@ if __name__ == "__main__":
 
     # use separate files for testing and live trading
     if TEST_MODE:
-        coins_bought_file_path = "data/test_coins_bought.json"
+        coins_bought_file_path = "/config/test_coins_bought.json"
 
     # if saved coins_bought json file exists and it's not empty then load it
     if (

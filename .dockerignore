@@ -14,6 +14,6 @@ __pycache__
 .gitignore
 tests
 test-output
-creds.ymlq
+creds.yml
 build
 data/
